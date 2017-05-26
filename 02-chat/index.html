@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CHAT</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <div id="app">
+    <div class="col-md-2 userlist">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-user"></span> Online ( {{connectUsers.length}} )
+      </div>
+      <ul class="chat">
+        <li v-for="user in connectUsers">{{user}}</li>
+      </ul>
+    </div>
+    <div class="col-md-10 chat-box">
+      <div id="livechat-container">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Chat
+          </div>
+          <div class="panel-body">
+            <ul class="chat" id="messages">
+              <li v-for= "message in messages" class="left clearfix">
+                <div v-if="message.type == 'info'" class="info">
+                  {{message.msg}}
+                </div>
+                <div v-if="message.type == 'chat'">
+                  <span class="chat-img pull-left">
+                  <img class="img-circle" src="https://prettyuglylittleliar.net/uploads/monthly_2016_04/y8QBjo8zT8w.jpg.44eaff72bddadc677fda9ec4d50e6b7e.jpg" alt="">
+                </span>
+                <div class="chat-body clearfix">
+                  <div class="header">
+                    <strong>{{message.user}}</strong>
+                    <small class="pull-right text-muted">
+                    <span class="glyphicon glyphicon-time">{{message.timestamp}}</span>
+                  </small>
+                  </div>
+                  <p>
+                      {{message.text}}
+                  </p>
+                </div>
+                </div>
+                </li>
+              <li>Hello Mar</li>
+            </ul>
+          </div>
+          <div class="panel-footer">
+            <form @submit.prevent="send" action="index.html" method="post">
+                <input v-model="message.text" type="text" name="" class="form-control input-lg" placeholder="Type chat here" value="">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js">
+
+    </script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.js">
+
+    </script>
+    <script src="client.js">
+
+    </script>
+  </body>
+</html>
